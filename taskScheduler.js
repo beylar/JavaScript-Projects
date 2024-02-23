@@ -66,7 +66,7 @@ const removeTasks = (title) => {
             var removedTask = tasks.splice(indexToRemove, 1)[0];
             console.log(`Task '${removedTask}' removed from the scheduler.`);
          } else {
-            console.log(`Task '${removedTask}' not found.`);
+            console.log(`Task '${title}' not found.`);
          }
 };
 
