@@ -3,12 +3,14 @@ let tasks = [
         title: "React",
         description: "JS- Frontend framework",
         dueDate: new Date("Mar 12 2012 10:00:00 AM"),
+        done: false
 
     },
     {
         title: "Node",
         description: "JS- Backend Framework",
         dueDate: new Date("Mar 8 2012 08:00:00 AM"),
+        done: true,
 
     },
 
@@ -16,18 +18,18 @@ let tasks = [
         title: "Express",
         description: "JS- Backend Framework",
         dueDate: new Date("Feb 20 2012 04:00:00 PM"),
+        done: false,
 
     },
 ];
 
 
-//how to display in the same way as those in the array
 const addTasks = (title,description,dueDate) => {
     //add a task with due date
     tasks.push(title,description,dueDate);
 };
-//this data is not being manipulated by displayTasks function
-addTasks("Reading","What men think",new Date("Jul 18 2010 06:00:59 AM"));
+//pushing this object in the array tasks
+addTasks("Reading","What men think",new Date("Jul 18 2012 06:00:59 AM"));
 
 const displayTasks = () => {
     //display Tasks sorted by their due dates
@@ -37,13 +39,13 @@ const displayTasks = () => {
         let dateA = a.dueDate;
         let dateB = b.dueDate;
         return dateA - dateB;
+        
     });
-
     console.log(tasks);
         
 }
 
-const updateTasks = () => {
+const updateTasks = (title, updatedDescription, updatedDueDate, taskCompleted) => {
     //using .findIndex to locate which value to update
 
     const index = tasks.findIndex(obj => {
@@ -56,16 +58,20 @@ const updateTasks = () => {
 };
 
 
-const removeTasks = () => {
+const removeTasks = (title) => {
     //users can remove tasks from the task scheduler
-    // use .pop()
-    tasks.pop(tasks[2]);
-    console.log(tasks);
-}
+    const indexToRemove = tasks.findIndex(task => task.title === title);
+
+        if (indexToRemove !== -1) {
+            const removedTask = tasks.splice(indexToRemove, 1)[0];
+            console.log(`Task '${removedTask.title}' removed from the scheduler.`);
+        } else {
+            console.log(`Task '${title}' not found.`);
+        }
+};
 
 //console.log (tasks);
 displayTasks();
 updateTasks();
 removeTasks();
 
-//

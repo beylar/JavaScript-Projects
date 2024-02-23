@@ -24,19 +24,38 @@ var userTasks = [
 
 //how to push for it to display like other activities in the userTasks arrays
 const addTasks = (task,category) => {
-    userTasks.push(task,category);
+    //task should be entered as object 
+    const newTask = {
+        task : task,
+        category : category,
+        completed : false,
+    };
+    userTasks.push (newTask);
 
 };
-const displayTasks = () => {
-    for (let i = 0; i<userTasks.length ; i++){
-        console.log(userTasks[i]);
+const displayTasksByCategory = () => {
+    //creating a function to put together the tasks by category
+    const tasksByCategory = {};
+    userTasks.forEach(task => {
+        const category = task.category;
+        if (!tasksByCategory[category]) {
+            tasksByCategory[category] = [];
+        }
+        tasksByCategory[category].push(task);
+    });
+
+    console.log('Tasks by Category:');
+    for (const category in tasksByCategory) {
+        console.log(`Category: ${category}`);
+        tasksByCategory[category].forEach(task => {
+            console.log(`  ${userTasks.completed ? '[X]' : '[ ]'} ${task.task}`);
+        });
     }
      
 };
-//proper way to mark the tasks
-//how to connect the array 
+
 const markTasks = (task) => {
-    const completedTask = tasks.find (item => item.task === task);
+    const completedTask = userTasks.find (item => item.task === task);
     if (completedTask) {
         completedTask.done = true;
         console.log(`Task ${task} marked as completed.`);
@@ -44,9 +63,9 @@ const markTasks = (task) => {
 };
 
 const removeTasks = (task) => {
-    const taskIndex = tasks.findIndex(item => item.task === task);
-    if (index !== -1) {
-        const removedTask = tasks.splice(index , 1)[0];
+    const taskIndex = userTasks.findIndex(item => item.task === task);
+    if (taskIndex !== -1) {
+        const removedTask = userTasks.splice(taskIndex , 1)[0];
         console.log(`Task ${removedTask} is removed for the To Do List`);
     }
     else {
@@ -55,9 +74,9 @@ const removeTasks = (task) => {
 };
 
 addTasks("Mopping","Chores");
-displayTasks();
+displayTasksByCategory();
 markTasks('Laundry');
 removeTasks("Cooking");
-displayTasks();
+displayTasksByCategory();
 
 
