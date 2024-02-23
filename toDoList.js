@@ -24,12 +24,13 @@ var userTasks = [
 
 //how to push for it to display like other activities in the userTasks arrays
 const addTasks = (task,category) => {
-    //task should be entered as object 
+    //task entered as object
     const newTask = {
         task : task,
         category : category,
         completed : false,
     };
+    //calling newTask function and pushing its object in the array of userTasks
     userTasks.push (newTask);
 
 };
@@ -55,6 +56,7 @@ const displayTasksByCategory = () => {
 };
 
 const markTasks = (task) => {
+    //using .find to locate the task that is completed
     const completedTask = userTasks.find (item => item.task === task);
     if (completedTask) {
         completedTask.done = true;
@@ -65,11 +67,11 @@ const markTasks = (task) => {
 const removeTasks = (task) => {
     const taskIndex = userTasks.findIndex(item => item.task === task);
     if (taskIndex !== -1) {
-        const removedTask = userTasks.splice(taskIndex , 1)[0];
+        var removedTask = this.userTasks.splice(taskIndex , 1)[0];
         console.log(`Task ${removedTask} is removed for the To Do List`);
     }
     else {
-        console.log(`Task ${removedTask} is not found in the To Do List`);
+        console.log(`Task ${task} is not found in the To Do List`);
     }
 };
 

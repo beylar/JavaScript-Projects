@@ -28,8 +28,6 @@ const addTasks = (title,description,dueDate) => {
     //add a task with due date
     tasks.push(title,description,dueDate);
 };
-//pushing this object in the array tasks
-addTasks("Reading","What men think",new Date("Jul 18 2012 06:00:59 AM"));
 
 const displayTasks = () => {
     //display Tasks sorted by their due dates
@@ -41,11 +39,13 @@ const displayTasks = () => {
         return dateA - dateB;
         
     });
+    //display the tasks arrays sorted according to date
     console.log(tasks);
         
 }
 
-const updateTasks = (title, updatedDescription, updatedDueDate, taskCompleted) => {
+//this function is used to update a given value of the object in the task array
+const updateTasks = (title) => {
     //using .findIndex to locate which value to update
 
     const index = tasks.findIndex(obj => {
@@ -60,18 +60,20 @@ const updateTasks = (title, updatedDescription, updatedDueDate, taskCompleted) =
 
 const removeTasks = (title) => {
     //users can remove tasks from the task scheduler
-    const indexToRemove = tasks.findIndex(task => task.title === title);
+    const indexToRemove = tasks.findIndex(task => tasks.title === title);
 
         if (indexToRemove !== -1) {
-            const removedTask = tasks.splice(indexToRemove, 1)[0];
-            console.log(`Task '${removedTask.title}' removed from the scheduler.`);
-        } else {
-            console.log(`Task '${title}' not found.`);
-        }
+            var removedTask = tasks.splice(indexToRemove, 1)[0];
+            console.log(`Task '${removedTask}' removed from the scheduler.`);
+         } else {
+            console.log(`Task '${removedTask}' not found.`);
+         }
 };
 
 //console.log (tasks);
+//
 displayTasks();
 updateTasks();
-removeTasks();
+addTasks("Reading","What men think",new Date("Jul 18 2012 06:00:59 AM"));
+removeTasks("React");
 
